@@ -1,35 +1,52 @@
-node {
-    def app
-    
-    stage('Clone repository') {
-      
+pipeline {
+    agent any
 
-        checkout scm
-    }
+    stages {
+        stage('Clone repository') {
+            steps {
+                checkout scm
+            }
+        }
 
-    stage('Build image') {
-  
-       app = docker.build("mosesdock/test")
-    }
+        stage('Build image') {
+            steps {
+                script {
+                    app = docker.build("mosesdock/app")
+                }
+            }
+        }
 
-    stage('Test image') {
-  
+        stage('Test image') {
+            steps {
+                script {
+                    app.inside {
+                        sh 'echo "Tests passed"'
+                    }
+                }
+            }
+        }
 
-        app.inside {
-            sh 'echo "Tests passed"'
+        stage('Push image to DockerHub') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        app.push("${env.BUILD_NUMBER}")
+                    }
+                }
+            }
+        }
+
+        stage('Release to EKS') {
+            steps {
+                script {
+                    withCredentials([kubeconfigFile(credentialsId: 'my-kubeconfig', variable: 'KUBECONFIG')]) {
+                        sh """
+                            export KUBECONFIG=${KUBECONFIG}
+                            kubectl set image deployment/my-deployment my-container=mosesdock/app:${env.BUILD_NUMBER} --record
+                        """
+                    }
+                }
+            }
         }
     }
-
-    stage('Push image') {
-        {
-            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub')
-            app.push("${env.BUILD_NUMBER}")
-            
-        }
-    }
-    
-    stage('Trigger ManifestUpdate') {
-                echo "triggering updatemanifestjob"
-                build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
-        }
 }
