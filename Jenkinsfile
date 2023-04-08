@@ -39,7 +39,7 @@ pipeline {
         stage('Release to EKS') {
             steps {
                 script {
-                    withCredentials([kubeconfigFile(credentialsId: 'my-kubeconfig', variable: 'KUBECONFIG')]) {
+                    withCredentials([kubeconfigFile(credentialsId: 'idan.moshe', variable: 'KUBECONFIG')]) {
                         sh """
                             export KUBECONFIG=${KUBECONFIG}
                             kubectl set image deployment/my-deployment my-container=mosesdock/app:${env.BUILD_NUMBER} --record
