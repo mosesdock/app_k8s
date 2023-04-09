@@ -36,12 +36,12 @@ pipeline {
             }
         }
 
-        // stage('Deploy App on k8s') {
-        //     steps {
-        //         script {
-        //           kubernetesDeploy(configs: "deployment.yaml")
-        //             }
-        //         }
-        //     }
+        stage('Deploy App on k8s') {
+            steps {
+                script {
+                  kubernetesDeploy(configs: 'deployment.yaml' ,kubeconfigId: 'mykubeconfig')
+                    }
+                }
+            }
         }
     }
