@@ -39,8 +39,10 @@ pipeline {
         stage('Deploy App on k8s') {
             steps {
                 echo 'Deploying....'
-                sh 'kubectl -- apply -f deployment.yaml'
+                withKubeConfig([credentialsId: 'mykubeconfig']) {
+                sh 'kubectl -- apply -f /var/jenkins_home/workspace/app-v2/deployment.yaml'
                 }
             }
         }
     }
+}    
