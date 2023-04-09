@@ -38,9 +38,8 @@ pipeline {
 
         stage('Deploy App on k8s') {
             steps {
-                script {
-                  kubernetesDeploy(configs: 'deployment.yaml' ,kubeconfigId: 'mykubeconfig')
-                    }
+                echo 'Deploying....'
+                sh 'minikube kubectl -- apply -f deployment.yaml'
                 }
             }
         }
