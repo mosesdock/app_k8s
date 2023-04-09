@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
     stages {
         stage('Clone repository') {
             steps {
@@ -40,8 +40,9 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 withKubeConfig([credentialsId: 'mykubeconfig']) {
-               
-                sh 'kubectl -- apply -k deployment.yaml'
+                sh "cat deployment.yaml"
+                sh "sed -i 's+mosesdock/app.*+mosesdock/app:${DOCKERTAG}+g' deployment.yaml"
+                sh "kubectl -- apply -f deployment.yaml"
 
                 }
             }
