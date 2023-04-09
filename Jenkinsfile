@@ -36,14 +36,15 @@ pipeline {
             }
         }
 
-        stage('Deploy App on k8s') {
+         stage('Deploy App on k8s') {
             steps {
                 
-                 withCredentials([kubeconfig(credentialsId: 'mykubeconfig', variable: 'KUBECONFIG')]) {
-                    sh 'kubectl --kubeconfig=$KUBECONFIG apply -f deployment.yaml'
-                }
+                withKubeConfig([credentialsId: 'mykubeconfig']) {
+                
+                sh 'kubectl -- apply -f deployment.yaml'
 
-            }   
+                }
+            }
         }
 
     }
