@@ -39,7 +39,7 @@ pipeline {
         stage('Deploy App on k8s') {
             steps {
                 echo 'Deploying....'
-                sh 'minikube kubectl -- apply -f deployment.yaml'
+                sh 'kubectl -- apply -f deployment.yaml'
                 }
             }
         }
