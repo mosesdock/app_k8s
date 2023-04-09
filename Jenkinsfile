@@ -16,15 +16,15 @@ pipeline {
             }
         }
 
-        stage('Test image') {
-            steps {
-                script {
-                    app.inside {
-                        sh 'echo "Tests passed"'
-                    }
-                }
-            }
-        }
+        // stage('Test image') {
+        //     steps {
+        //         script {
+        //             app.inside {
+        //                 sh 'echo "Tests passed"'
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Push image to DockerHub') {
             steps {
@@ -36,15 +36,15 @@ pipeline {
             }
         }
 
-        stage('Deploy App on k8s') {
-            steps {
-                echo 'Deploying....'
-                withKubeConfig([credentialsId: 'mykubeconfig']) {
-                sh "cat deployment.yaml"
-                sh "kubectl -- create -f deployment.yaml"
+        // stage('Deploy App on k8s') {
+        //     steps {
+        //         echo 'Deploying....'
+        //         withKubeConfig([credentialsId: 'mykubeconfig']) {
+        //         sh "cat deployment.yaml"
+        //         sh "kubectl -- create -f deployment.yaml"
 
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
     }
 }    
