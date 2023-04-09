@@ -36,15 +36,15 @@ pipeline {
             }
         }
 
-        // stage('Deploy App on k8s') {
-        //     steps {
-        //         echo 'Deploying....'
-        //         withKubeConfig([credentialsId: 'mykubeconfig']) {
-        //         sh "cat deployment.yaml"
-        //         sh "kubectl -- create -f deployment.yaml"
+        stage('Deploy App on k8s') {
+            steps {
+                
+                withKubeConfig([credentialsId: 'mykubeconfig']) {
+                
+                    sh "kubectl -- create -f deployment.yaml"
 
-        //         }
-        //     }
-        // }
+                }
+            }
+        }
     }
 }    
