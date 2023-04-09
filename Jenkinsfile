@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+    
     stages {
         stage('Clone repository') {
             steps {
