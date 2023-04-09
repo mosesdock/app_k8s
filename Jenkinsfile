@@ -40,7 +40,9 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 withKubeConfig([credentialsId: 'mykubeconfig']) {
+                sh 'kubectl create -f deployment.yaml'
                 sh 'kubectl -- apply -f deployment.yaml'
+
                 }
             }
         }
