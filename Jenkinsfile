@@ -39,14 +39,9 @@ pipeline {
         // stage('Deploy App on k8s') {
         //     steps {
         //         script {
-        //             withCredentials([kubeconfigFile(credentialsId: 'idan.moshe', variable: 'KUBECONFIG')]) {
-        //                 sh """
-        //                     export KUBECONFIG=${KUBECONFIG}
-        //                     kubectl set image deployment/my-deployment my-container=mosesdock/app:${env.BUILD_NUMBER} --record
-        //                 """
+        //           kubernetesDeploy(configs: "deployment.yaml")
         //             }
         //         }
         //     }
-        // }
+        }
     }
-}
