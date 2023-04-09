@@ -41,7 +41,7 @@ pipeline {
                 echo 'Deploying....'
                 withKubeConfig([credentialsId: 'mykubeconfig']) {
                 sh "cat deployment.yaml"
-                sh "sed -i 's+mosesdock/app.*+mosesdock/app:${DOCKERTAG}+g' deployment.yaml"
+                sh "sed -i 's+mosesdock/app.*+mosesdock/app:latest' deployment.yaml"
                 sh "kubectl -- apply -f deployment.yaml"
 
                 }
