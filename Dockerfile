@@ -14,8 +14,7 @@ WORKDIR /app
 RUN echo pip3 install -r requirements.txt
 # Copying all the application files to the working directory
 COPY . .
-# Install all the dependencies required to run the Flask application
-RUN pip install -r requirements.txt
+
 # Add this ENV
 ENV FLASK_APP=App.py
 # Expose the Docker container for the application to run on port 5000

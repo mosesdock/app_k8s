@@ -14,12 +14,11 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: mosesdock/app:9
-        resources:
+      - image: mosesdock/app:11
           limits:
             memory: "128Mi"
             cpu: "500m"
-        ports:
+      ports:
         - containerPort: 5000
 ---
 
