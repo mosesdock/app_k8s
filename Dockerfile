@@ -11,8 +11,7 @@ COPY . /app/requirements.txt
 WORKDIR /app
 
 # install the dependencies and packages in the requirements file
-RUN echo -r requirements.txt
-RUN pip3 install -r requirements.txt
+RUN echo pip3 install -r requirements.txt
 # Copying all the application files to the working directory
 COPY . .
 

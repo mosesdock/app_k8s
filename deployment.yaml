@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: mosesdock/app:3
+        image: mosesdock/app:4
         resources:
           limits:
             memory: "128Mi"
