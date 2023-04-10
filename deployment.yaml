@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: flask-app-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: flask-app
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: mosesdock/app:13
+        image: mosesdock/app:2
         resources:
           limits:
             memory: "128Mi"
