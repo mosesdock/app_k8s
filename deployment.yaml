@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: flask-app-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: flask-app
@@ -14,14 +14,15 @@ spec:
     spec:
       containers:
       - name: flask-app
-      - image: mosesdock/app:11
+        image: mosesdock/app:11
+        resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
-      ports:
+        ports:
         - containerPort: 5000
+status: {}
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
