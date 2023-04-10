@@ -17,4 +17,4 @@ COPY . .
 # Add this ENV
 ENV FLASK_APP=App.py
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD [ "python3", "app.py", "-m" , "flask", "run", "--host=0.0.0.0"]
