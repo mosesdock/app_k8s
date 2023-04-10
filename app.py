@@ -1,6 +1,10 @@
 from flask import Flask
+
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def hello_world():
-    return  'CI/CD pipeline with Jenkins'
+    return "<p>This is a Hello World application</p>"
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=True)
