@@ -18,4 +18,4 @@ This is a Jenkins pipeline for building a Flask Python app and deploying it on a
 * Git Plugin: Install the Git plugin for Jenkins so that the pipeline can checkout the code from the Git repository.
 * Docker Credentials: Configure Docker Hub credentials in Jenkins so that the pipeline can push the Docker image to Docker Hub.
 * Kubernetes Credentials: Configure the kubeconfig file with the credentials to access your Kubernetes cluster.
-* Kubernetes Plugin :
+* Kubernetes Plugin: Install the Kubernetes plugin for Jenkins so that the pipeline can deploy the app on the Minikube cluster.
