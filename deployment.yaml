@@ -28,9 +28,10 @@ kind: Service
 metadata:
   name: flask-app-service
 spec:
-  selector:
-    app: flask-app-deployment
+  type: LoadBalancer
   ports:
   - port: 80
     targetPort: 5000
-  type: LoadBalancer
+  selector:
+    app: flask-app-deployment
+  
