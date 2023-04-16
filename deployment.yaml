@@ -26,9 +26,7 @@ status: {}
 apiVersion: v1
 kind: Service
 metadata:
-  name: lb-flask-service
-  labels:
-    app: lb-service
+  name: flask-app-service
 spec:
   type: LoadBalancer
   ports:
@@ -36,4 +34,3 @@ spec:
     targetPort: 5000
   selector:
     app: flask-app-deployment
-  
