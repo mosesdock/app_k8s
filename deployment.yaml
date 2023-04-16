@@ -33,4 +33,4 @@ spec:
   - port: 80
     targetPort: 5000
   selector:
-    app: flask-app-deployment
+    app: flask-app
